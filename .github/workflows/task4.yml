@@ -23,8 +23,8 @@ jobs:
         ref: master
         path: tools
 
-    - name: Build the task project
-      run:
+    - name: Build the task4 project
+      run: |
         set INCLUDE=C:\Program Files (x86)\Microsoft SDKs\Windows\V7.1A\Include;%GITHUB_WORKSPACE%\tools
         call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars32.bat"
         echo on
