@@ -1,4 +1,5 @@
 on: push
+name: task5
 
 jobs:
   build:
@@ -24,14 +25,13 @@ jobs:
       run: |
         set INCLUDE=C:\Program Files (x86)\Microsoft SDKs\Windows\V7.1A\Include;%GITHUB_WORKSPACE%\tools
         call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars32.bat"
+        echo ПЕРЕХОЖУ В ПАПКУ %GITHUB_WORKSPACE%\lab\${{github.workflow}}
         echo on
-        for /F "usebackq" %%i in ('${{github.workflow}}') do set TASKNO=%%~ni 
-        echo ПЕРЕХОЖУ В ПАПКУ %GITHUB_WORKSPACE%\lab\%TASKNO%
-        cd %GITHUB_WORKSPACE%\lab\%TASKNO%
+        cd %GITHUB_WORKSPACE%\lab\${{github.workflow}}
         rmdir /S /Q Debug
         set DefaultPlatformToolset=v142
-        set VCTargetsPath=C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Microsoft\VC\v160\
         set MSBUILD="C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\MSBuild.exe"
         %GITHUB_WORKSPACE%\tools\build.cmd
+        echo on
         grep
       shell: cmd
