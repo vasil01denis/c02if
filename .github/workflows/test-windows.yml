@@ -14,6 +14,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+      with:
+        path: c02if
 
     - uses: actions/checkout@v2
       with:
@@ -27,7 +29,7 @@ jobs:
         set INCLUDE=C:\Program Files (x86)\Microsoft SDKs\Windows\V7.1A\Include;%GITHUB_WORKSPACE%\testlib
         set INCLIB=%GITHUB_WORKSPACE%\testlib
         call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars32.bat"
-        cd %GITHUB_WORKSPACE
+        cd %GITHUB_WORKSPACE\c02if
         rmdir /S /Q objs
         set DefaultPlatformToolset=v142
         set VCTargetsPath=C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Microsoft\VC\v160\
