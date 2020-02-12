@@ -19,6 +19,7 @@ jobs:
       with:
         repository: MikeMirzayanov/testlib
         ref: master
+        path: testlib
 
     - name: Build the solution
       run: |
@@ -28,6 +29,7 @@ jobs:
         set INCLIB=%GITHUB_WORKSPACE%\testlib
         call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars32.bat"
         echo on
+        echo CHANGING INTO %GITHUB_WORKSPACE%\c02if
         cd %GITHUB_WORKSPACE%\c02if
         rmdir /S /Q objs
         set DefaultPlatformToolset=v142
