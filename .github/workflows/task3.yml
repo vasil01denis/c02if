@@ -1,0 +1,39 @@
+name: task3
+
+on: push
+
+jobs:
+  build:
+
+    runs-on: windows-2019
+    strategy:
+      fail-fast: false
+    timeout-minutes: 30
+
+    name: Test VS2019
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        path: lab
+
+    - uses: actions/checkout@v2
+      with:
+        repository: av-pavlov/grader-tools
+        ref: master
+        path: tools
+
+    - name: Build the task project
+      run:
+        set INCLUDE=C:\Program Files (x86)\Microsoft SDKs\Windows\V7.1A\Include;%GITHUB_WORKSPACE%\tools
+        call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars32.bat"
+        echo on
+        echo ПЕРЕХОЖУ В ПАПКУ %GITHUB_WORKSPACE%\lab\task3
+        cd %GITHUB_WORKSPACE%\lab\task3
+        rmdir /S /Q Debug
+        set DefaultPlatformToolset=v142
+        set VCTargetsPath=C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Microsoft\VC\v160\
+        set MSBUILD="C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\MSBuild.exe"
+        %GITHUB_WORKSPACE%\tools\build.cmd
+      shell: cmd
+

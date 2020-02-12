@@ -1,6 +1,6 @@
-name: Test Visual Studio Build
+name: task1
 
-on: [push]
+on: push
 
 jobs:
   build:
@@ -23,19 +23,17 @@ jobs:
         ref: master
         path: tools
 
-    - name: Build the solution
-      run: |
-        REM FIXME uses /MT not /MD, see makefile.vc and win32.mak for more info
-        echo on
+    - name: Build the task project
+      run:
         set INCLUDE=C:\Program Files (x86)\Microsoft SDKs\Windows\V7.1A\Include;%GITHUB_WORKSPACE%\tools
         call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars32.bat"
         echo on
-        echo CHANGING INTO %GITHUB_WORKSPACE%\lab
-        cd %GITHUB_WORKSPACE%\lab
-        rmdir /S /Q objs
+        echo ПЕРЕХОЖУ В ПАПКУ %GITHUB_WORKSPACE%\lab\task1
+        cd %GITHUB_WORKSPACE%\lab\task1
+        rmdir /S /Q Debug
         set DefaultPlatformToolset=v142
         set VCTargetsPath=C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Microsoft\VC\v160\
         set MSBUILD="C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\MSBuild.exe"
-        ../tools/build.cmd
+        %GITHUB_WORKSPACE%\tools\build.cmd
       shell: cmd
 
