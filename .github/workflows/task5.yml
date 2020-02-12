@@ -1,6 +1,3 @@
-env: 
-  TASKNO: 5
-name: task${{ env.TASKNO }}
 on: push
 
 jobs:
@@ -28,8 +25,9 @@ jobs:
         set INCLUDE=C:\Program Files (x86)\Microsoft SDKs\Windows\V7.1A\Include;%GITHUB_WORKSPACE%\tools
         call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars32.bat"
         echo on
-        echo ПЕРЕХОЖУ В ПАПКУ %GITHUB_WORKSPACE%\lab\task${{ env.TASKNO }}
-        cd %GITHUB_WORKSPACE%\lab\task${{ env.TASKNO }}
+        for /F %i in ("${{github.workflow}}") do set TASKNO=%~ni 
+        echo ПЕРЕХОЖУ В ПАПКУ %GITHUB_WORKSPACE%\lab\%TASKNO%
+        cd %GITHUB_WORKSPACE%\lab\%TASKNO%
         rmdir /S /Q Debug
         set DefaultPlatformToolset=v142
         set VCTargetsPath=C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Microsoft\VC\v160\
