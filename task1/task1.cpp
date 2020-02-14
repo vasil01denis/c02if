@@ -5,16 +5,18 @@
 */
 #define _CRT_SECURE_NO_WARNINGS
 
-#include <iostream>
-
-using namespace std;
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
 
 int main(){
 	int n;
-
-	cin >> n;
-	if (n < 0) 
-		cout << "OTR\n";
-
-	return 0;
+	scanf("%d", &n);
+	if(n > 0){
+		printf("POL\n");
+	} else if(n == 0){
+		printf("NUL\n");
+	} else
+		printf("OTR\n");
+	system("pause");
 }

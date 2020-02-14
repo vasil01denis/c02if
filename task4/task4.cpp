@@ -6,17 +6,21 @@
 */
 #define _CRT_SECURE_NO_WARNINGS
 
-#include <clocale>
-#include <iostream>
-
-using namespace std;
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+// 1..100 лет
+// Вам n лет/года/год
 
 int main(){
 	int n;
-
-	setlocale(LC_ALL, "ru");
-	cin >> n;
-
-    cout << "ВАМ " << n << " ЛЕТ\n";
-	return 0;
+	setlocale(LC_ALL, "Rus");
+	scanf("%d", &n);
+	if(n<1) printf("ERROR\n");
+	else if(n>100) printf("ERROR\n");
+	else if(n%10 == 1 && n != 11) printf("Вам %d год\n", n);
+	else if(n>=5 && n<=20) printf("Вам %d лет\n", n);
+	else if(n%10>=5) printf("Вам %d лет\n", n);
+	else printf("Вам %d года\n", n);
+	system("pause");
 }
